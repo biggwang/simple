@@ -15,5 +15,20 @@ spec:
         app: po-simple
     spec:
       containers:
-        - image: boriswinter/simple:1.0
+        - image: boriswinter/simple:2.0
           name: deploy-simple
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple
+spec:
+  selector:
+    app: deploy-simple
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
